@@ -1,13 +1,16 @@
 #!/usr/bin python
 #coding: utf-8
+# LifeCardの明細CSVを読み込んで合算
 import sys
 
 argvs = sys.argv
+flg = False
+dict = {}
+
 if(len(argvs) < 2):
     print "select csv file"
     sys.exit()
-flg = False
-dict = {}
+
 for line in open(argvs[1], 'r'):
     strs = line[:-1].split(',')
     if (len(strs) < 2):
@@ -20,7 +23,7 @@ for line in open(argvs[1], 'r'):
     if (strs[0] == "明細No."):
         flg = True
 
-f = open("CardHistorySum.csv", 'w')
+f = open("CardHistorySum.csv", 'a')
 for key in dict:
     print key + ", " + str(dict[key])
     f.write(key + ", " + str(dict[key]) + "\n")
